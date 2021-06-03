@@ -51,8 +51,6 @@ oneCtx.use("one", () => {
 })
 ```
 
-> Alternatively, these could be [records](https://github.com/tc39/proposal-record-tuple), but that's not a requirement for this proposal.
-
 ## Why?
 
 Consider how context is used in virtual DOM frameworks. Now imagine if you could do that with your models as well, injecting their dependencies without having to explicitly pass them around everywhere. Think of it as to functions as `import.meta` is to modules, except in this case, instead of the host determining what variables to pass (and potentially offering hooks into that), it's all purely in ECMAScript code.
