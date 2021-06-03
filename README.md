@@ -8,12 +8,12 @@ The idea is this:
 Here's some code to help elaborate a little further:
 
 ```js
+const three = Symbol("three")
+
 let rootMeta = function.meta
 let fooMeta
 let barMeta
 let bazMeta
-
-const three = Symbol("three")
 
 function foo() {
     fooMeta = function.meta
@@ -107,12 +107,12 @@ Here's the code example from earlier transpiled to use that (minus the realm bit
 ```js
 import {getFunctionMeta as getFunctionMeta$} from './polyfill.js'
 
+const three = Symbol("three")
+
 let rootMeta = function_meta$
 let fooMeta
 let barMeta
 let bazMeta
-
-const three = Symbol("three")
 
 function foo() {
     var function_meta$ = getFunctionMeta$()
