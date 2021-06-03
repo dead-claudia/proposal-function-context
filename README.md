@@ -3,9 +3,10 @@
 The idea is this:
 
 - `context = new Context(defaultValue)` - Create a new context, with an optional default value
-- `value = context.get()` - Get the context's associated value in the running execution context.
-- `result = context.use(value, () => result)` - Invoke a function with `value` as the context's associated value in its running execution context.
+- `value = context.get()` - Get the context's associated value in the current execution context.
+- `result = context.use(value, func)` - Invoke a function with `value` as the context's associated value in its execution context.
 - On function call, all active contexts with their associated values are copied over to that new context. This includes cross-realm calls.
+- Arrow functions inherit their context from their outer closures.
 
 Here's some code to help elaborate a little further:
 
@@ -16,7 +17,7 @@ const twoCtx = new Context()
 console.log(oneCtx.get()) // undefined
 console.log(twoCtx.get()) // undefined
 
-const fooIter = oneCtx.use(1, () => foo())
+const fooIter = oneCtx.use(1, foo)
 console.log(oneCtx.get()) // undefined
 console.log(twoCtx.get()) // undefined
 
@@ -27,7 +28,13 @@ console.log(twoCtx.get()) // undefined
 function *foo() {
     console.log(oneCtx.get()) // 1
     console.log(twoCtx.get()) // undefined
-    twoCtx.use(2, () => bar())
+    twoCtx.use(2, bar)
+    twoCtx.use(2, () => {
+        // It's an arrow function thus it didn't inherit the newly updated
+        // context
+        console.log(oneCtx.get()) // 1
+        console.log(twoCtx.get()) // undefined
+    })
     console.log(oneCtx.get()) // 1
     console.log(twoCtx.get()) // undefined
     yield
