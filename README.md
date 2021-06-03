@@ -7,7 +7,7 @@ The idea is this:
 
 Here's some code to help elaborate a little further:
 
-```
+```js
 let rootMeta = function.meta
 let fooMeta
 let barMeta
