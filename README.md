@@ -14,7 +14,7 @@ And here's the issues with that:
 1. If you've heard of "prop drilling" in React, that's basically what this is. This of course also includes function arguments and such, too. It's much harder to screw up in testing, but it's almost as boilerplatey as globals otherwise.
 1. React and a few other virtual DOM frameworks provide a context feature that's similar to what I'm seeking here, just integrated with their execution model. But these are necessarily extremely intertwined with their data models.
 
-And in addition, I've seen a series of language proposals that can't really be polyfilled or transpiled without this without also needing to transpile intermediate code.
+And in addition, I've seen a series of language proposals that can't really be polyfilled or transpiled without also needing to transpile intermediate code, which in general isn't something you can rely on even being possible (like if you're working through built-ins or other native functions).
 
 - [Global cancel tokens that are intelligently tracked](https://github.com/tc39/proposal-cancellation/issues/28) - this needs a mechanism to ensure child cancel tokens are tracked correctly so that when their parent cancels, they cancel as well, and so they don't need nearly the effort to connect properly (for one, none of us want to have to drill this through arguments).
 - [Async context](https://github.com/legendecas/proposal-async-context) - this needs a way to track async operation inheritance.
